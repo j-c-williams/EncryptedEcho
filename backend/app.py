@@ -171,6 +171,25 @@ def get_users():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
+@app.route('/passwords', methods=['GET'])
+def get_passwords():
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        users = cursor.execute("SELECT username, password_hash FROM users").fetchall()
+        
+        # Convert to list of dictionaries
+        users_list = []
+        for user in users:
+            users_list.append({
+                "username": user['username'],
+                "password_hash": user['password_hash']
+            })
+        
+        return jsonify(users_list), 200
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
 # --- Send Message route ---
 @app.route('/send', methods=['POST'])
 def send_message():
