@@ -1,0 +1,3198 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">414444</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-high">
+    <b>flask_debug_true: </b> A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.<br>
+    <b>Test ID:</b> B201<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/94.html" target="_blank">CWE-94</a><br>
+    <b>File: </b><a href="backend/app.py" target="_blank">backend/app.py</a><br>
+    <b>Line number: </b>393<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b201_flask_debug_true.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b201_flask_debug_true.html</a><br>
+
+<div class="code">
+<pre>
+392	    # Run the app
+393	    app.run(debug=True, host=&#x27;0.0.0.0&#x27;, port=5000)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="backend/app.py" target="_blank">backend/app.py</a><br>
+    <b>Line number: </b>393<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+392	    # Run the app
+393	    app.run(debug=True, host=&#x27;0.0.0.0&#x27;, port=5000)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> The pyCrypto library and its module RSA are no longer actively maintained and have been deprecated. Consider using pyca/cryptography library.<br>
+    <b>Test ID:</b> B413<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/crypto_utils.py" target="_blank">backend/crypto_utils.py</a><br>
+    <b>Line number: </b>2<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b413-import-pycrypto" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b413-import-pycrypto</a><br>
+
+<div class="code">
+<pre>
+1	from Crypto.cipher import AES, PKCS1_OAEP
+2	from Crypto.PublicKey import RSA
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-high">
+    <b>trojansource: </b> A Python source file contains bidirectional control characters ('\u202e').<br>
+    <b>Test ID:</b> B613<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/838.html" target="_blank">CWE-838</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\bandit\plugins\trojansource.py" target="_blank">backend/venv\Lib\site-packages\bandit\plugins\trojansource.py</a><br>
+    <b>Line number: </b>22<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b613_trojansource.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b613_trojansource.html</a><br>
+
+<div class="code">
+<pre>
+21	     3  	access_level = &quot;user&quot;
+22	     4	    if access_level != &#x27;none‮⁦&#x27;: # Check if admin ⁩⁦&#x27; and access_level != &#x27;user
+23	     5	        print(&quot;You are an admin.\n&quot;)
+24	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cffi\recompiler.py" target="_blank">backend/venv\Lib\site-packages\cffi\recompiler.py</a><br>
+    <b>Line number: </b>78<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+77	    def as_python_expr(self):
+78	        flags = eval(self.flags, G_FLAGS)
+79	        fields_expr = [c_field.as_field_python_expr()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cffi\setuptools_ext.py" target="_blank">backend/venv\Lib\site-packages\cffi\setuptools_ext.py</a><br>
+    <b>Line number: </b>25<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+24	    code = compile(src, filename, &#x27;exec&#x27;)
+25	    exec(code, glob, glob)
+26	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\click\_termui_impl.py" target="_blank">backend/venv\Lib\site-packages\click\_termui_impl.py</a><br>
+    <b>Line number: </b>429<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+428	        [cmd_absolute],
+429	        shell=True,
+430	        stdin=subprocess.PIPE,
+431	        env=env,
+432	        errors=&quot;replace&quot;,
+433	        text=True,
+434	    )
+435	    assert c.stdin is not None
+436	    try:
+437	        for text in generator:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\click\_termui_impl.py" target="_blank">backend/venv\Lib\site-packages\click\_termui_impl.py</a><br>
+    <b>Line number: </b>552<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+551	        try:
+552	            c = subprocess.Popen(f&#x27;{editor} &quot;{filename}&quot;&#x27;, env=environ, shell=True)
+553	            exit_code = c.wait()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py</a><br>
+    <b>Line number: </b>127<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+126	_SIG_OIDS_TO_HASH: dict[ObjectIdentifier, hashes.HashAlgorithm | None] = {
+127	    SignatureAlgorithmOID.RSA_WITH_MD5: hashes.MD5(),
+128	    SignatureAlgorithmOID.RSA_WITH_SHA1: hashes.SHA1(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py</a><br>
+    <b>Line number: </b>128<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+127	    SignatureAlgorithmOID.RSA_WITH_MD5: hashes.MD5(),
+128	    SignatureAlgorithmOID.RSA_WITH_SHA1: hashes.SHA1(),
+129	    SignatureAlgorithmOID._RSA_WITH_SHA1: hashes.SHA1(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py</a><br>
+    <b>Line number: </b>129<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+128	    SignatureAlgorithmOID.RSA_WITH_SHA1: hashes.SHA1(),
+129	    SignatureAlgorithmOID._RSA_WITH_SHA1: hashes.SHA1(),
+130	    SignatureAlgorithmOID.RSA_WITH_SHA224: hashes.SHA224(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py</a><br>
+    <b>Line number: </b>138<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+137	    SignatureAlgorithmOID.RSA_WITH_SHA3_512: hashes.SHA3_512(),
+138	    SignatureAlgorithmOID.ECDSA_WITH_SHA1: hashes.SHA1(),
+139	    SignatureAlgorithmOID.ECDSA_WITH_SHA224: hashes.SHA224(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\_oid.py</a><br>
+    <b>Line number: </b>147<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+146	    SignatureAlgorithmOID.ECDSA_WITH_SHA3_512: hashes.SHA3_512(),
+147	    SignatureAlgorithmOID.DSA_WITH_SHA1: hashes.SHA1(),
+148	    SignatureAlgorithmOID.DSA_WITH_SHA224: hashes.SHA224(),
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure cipher mode cryptography.hazmat.primitives.ciphers.modes.ECB.<br>
+    <b>Test ID:</b> B305<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py</a><br>
+    <b>Line number: </b>21<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes</a><br>
+
+<div class="code">
+<pre>
+20	    # RFC 3394 Key Wrap - 2.2.1 (index method)
+21	    encryptor = Cipher(AES(wrapping_key), ECB()).encryptor()
+22	    n = len(r)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure cipher mode cryptography.hazmat.primitives.ciphers.modes.ECB.<br>
+    <b>Test ID:</b> B305<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py</a><br>
+    <b>Line number: </b>64<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes</a><br>
+
+<div class="code">
+<pre>
+63	    # Implement RFC 3394 Key Unwrap - 2.2.2 (index method)
+64	    decryptor = Cipher(AES(wrapping_key), ECB()).decryptor()
+65	    n = len(r)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure cipher mode cryptography.hazmat.primitives.ciphers.modes.ECB.<br>
+    <b>Test ID:</b> B305<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py</a><br>
+    <b>Line number: </b>97<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes</a><br>
+
+<div class="code">
+<pre>
+96	        # RFC 5649 - 4.1 - exactly 8 octets after padding
+97	        encryptor = Cipher(AES(wrapping_key), ECB()).encryptor()
+98	        b = encryptor.update(aiv + key_to_wrap)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure cipher mode cryptography.hazmat.primitives.ciphers.modes.ECB.<br>
+    <b>Test ID:</b> B305<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\primitives\keywrap.py</a><br>
+    <b>Line number: </b>119<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b304-b305-ciphers-and-modes</a><br>
+
+<div class="code">
+<pre>
+118	        # RFC 5649 - 4.2 - exactly two 64-bit blocks
+119	        decryptor = Cipher(AES(wrapping_key), ECB()).decryptor()
+120	        out = decryptor.update(wrapped_key)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of insecure MD2, MD4, MD5, or SHA1 hash function.<br>
+    <b>Test ID:</b> B303<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\hazmat\primitives\serialization\ssh.py" target="_blank">backend/venv\Lib\site-packages\cryptography\hazmat\primitives\serialization\ssh.py</a><br>
+    <b>Line number: </b>979<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b303-md5</a><br>
+
+<div class="code">
+<pre>
+978	            if self._inner_sig_type == _SSH_RSA:
+979	                hash_alg = hashes.SHA1()
+980	            elif self._inner_sig_type == _SSH_RSA_SHA256:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\cryptography\x509\extensions.py" target="_blank">backend/venv\Lib\site-packages\cryptography\x509\extensions.py</a><br>
+    <b>Line number: </b>71<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+70	
+71	    return hashlib.sha1(data).digest()
+72	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\flask\cli.py" target="_blank">backend/venv\Lib\site-packages\flask\cli.py</a><br>
+    <b>Line number: </b>1029<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+1028	        with open(startup) as f:
+1029	            eval(compile(f.read(), startup, &quot;exec&quot;), ctx)
+1030	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\flask\config.py" target="_blank">backend/venv\Lib\site-packages\flask\config.py</a><br>
+    <b>Line number: </b>209<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+208	            with open(filename, mode=&quot;rb&quot;) as config_file:
+209	                exec(compile(config_file.read(), filename, &quot;exec&quot;), d.__dict__)
+210	        except OSError as e:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\flask\json\tag.py" target="_blank">backend/venv\Lib\site-packages\flask\json\tag.py</a><br>
+    <b>Line number: </b>188<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+187	    def to_python(self, value: t.Any) -&gt; t.Any:
+188	        return Markup(value)
+189	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\flask\sessions.py" target="_blank">backend/venv\Lib\site-packages\flask\sessions.py</a><br>
+    <b>Line number: </b>295<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+294	    &quot;&quot;&quot;
+295	    return hashlib.sha1(string)
+296	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\itsdangerous\signer.py" target="_blank">backend/venv\Lib\site-packages\itsdangerous\signer.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+44	    &quot;&quot;&quot;
+45	    return hashlib.sha1(string)
+46	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\bccache.py" target="_blank">backend/venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>73<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+72	        # the source code of the file changed, we need to reload
+73	        checksum = pickle.load(f)
+74	        if self.checksum != checksum:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\bccache.py" target="_blank">backend/venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>79<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+78	        try:
+79	            self.code = marshal.load(f)
+80	        except (EOFError, ValueError, TypeError):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\bccache.py" target="_blank">backend/venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>156<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+155	        &quot;&quot;&quot;Returns the unique hash key for this template name.&quot;&quot;&quot;
+156	        hash = sha1(name.encode(&quot;utf-8&quot;))
+157	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\bccache.py" target="_blank">backend/venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>165<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+164	        &quot;&quot;&quot;Returns a checksum for the source.&quot;&quot;&quot;
+165	        return sha1(source.encode(&quot;utf-8&quot;)).hexdigest()
+166	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\debug.py" target="_blank">backend/venv\Lib\site-packages\jinja2\debug.py</a><br>
+    <b>Line number: </b>145<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+144	    try:
+145	        exec(code, globals, locals)
+146	    except BaseException:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\environment.py" target="_blank">backend/venv\Lib\site-packages\jinja2\environment.py</a><br>
+    <b>Line number: </b>1228<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1227	        namespace = {&quot;environment&quot;: environment, &quot;__file__&quot;: code.co_filename}
+1228	        exec(code, namespace)
+1229	        rv = cls._from_namespace(environment, namespace, globals)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\environment.py" target="_blank">backend/venv\Lib\site-packages\jinja2\environment.py</a><br>
+    <b>Line number: </b>1544<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1543	    def __html__(self) -&gt; Markup:
+1544	        return Markup(concat(self._body_stream))
+1545	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\ext.py" target="_blank">backend/venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>176<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+175	        if __context.eval_ctx.autoescape:
+176	            rv = Markup(rv)
+177	        # Always treat as a format string, even if there are no
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\ext.py" target="_blank">backend/venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>197<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+196	        if __context.eval_ctx.autoescape:
+197	            rv = Markup(rv)
+198	        # Always treat as a format string, see gettext comment above.
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\ext.py" target="_blank">backend/venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>213<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+212	        if __context.eval_ctx.autoescape:
+213	            rv = Markup(rv)
+214	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\ext.py" target="_blank">backend/venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>238<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+237	        if __context.eval_ctx.autoescape:
+238	            rv = Markup(rv)
+239	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>316<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+315	    if eval_ctx.autoescape:
+316	        rv = Markup(rv)
+317	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>820<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+819	    if eval_ctx.autoescape:
+820	        rv = Markup(rv)
+821	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>851<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+850	    if isinstance(s, Markup):
+851	        indention = Markup(indention)
+852	        newline = Markup(newline)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>852<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+851	        indention = Markup(indention)
+852	        newline = Markup(newline)
+853	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>1056<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1055	
+1056	    return Markup(str(value)).striptags()
+1057	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\filters.py" target="_blank">backend/venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>1377<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1376	    &quot;&quot;&quot;
+1377	    return Markup(value)
+1378	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\loaders.py" target="_blank">backend/venv\Lib\site-packages\jinja2\loaders.py</a><br>
+    <b>Line number: </b>661<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+660	    def get_template_key(name: str) -&gt; str:
+661	        return &quot;tmpl_&quot; + sha1(name.encode(&quot;utf-8&quot;)).hexdigest()
+662	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\nodes.py" target="_blank">backend/venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>619<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+618	        if eval_ctx.autoescape:
+619	            return Markup(self.data)
+620	        return self.data
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\nodes.py" target="_blank">backend/venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>1091<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1090	        eval_ctx = get_eval_context(self, eval_ctx)
+1091	        return Markup(self.expr.as_const(eval_ctx))
+1092	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\nodes.py" target="_blank">backend/venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>1112<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1111	        if eval_ctx.autoescape:
+1112	            return Markup(expr)
+1113	        return expr
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\runtime.py" target="_blank">backend/venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>375<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+374	        if self._context.eval_ctx.autoescape:
+375	            return Markup(rv)
+376	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-46">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\runtime.py" target="_blank">backend/venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>389<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+388	        if self._context.eval_ctx.autoescape:
+389	            return Markup(rv)
+390	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-47">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\runtime.py" target="_blank">backend/venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>776<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+775	        if autoescape:
+776	            return Markup(rv)
+777	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-48">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\runtime.py" target="_blank">backend/venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>787<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+786	        if autoescape:
+787	            rv = Markup(rv)
+788	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-49">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\utils.py" target="_blank">backend/venv\Lib\site-packages\jinja2\utils.py</a><br>
+    <b>Line number: </b>403<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+402	        return &quot;\n\n&quot;.join(result)
+403	    return markupsafe.Markup(
+404	        &quot;\n&quot;.join(f&quot;&lt;p&gt;{markupsafe.escape(x)}&lt;/p&gt;&quot; for x in result)
+405	    )
+406	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-50">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\jinja2\utils.py" target="_blank">backend/venv\Lib\site-packages\jinja2\utils.py</a><br>
+    <b>Line number: </b>668<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+667	
+668	    return markupsafe.Markup(
+669	        dumps(obj, **kwargs)
+670	        .replace(&quot;&lt;&quot;, &quot;\\u003c&quot;)
+671	        .replace(&quot;&gt;&quot;, &quot;\\u003e&quot;)
+672	        .replace(&quot;&amp;&quot;, &quot;\\u0026&quot;)
+673	        .replace(&quot;&#x27;&quot;, &quot;\\u0027&quot;)
+674	    )
+675	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-51">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pbr\testr_command.py" target="_blank">backend/venv\Lib\site-packages\pbr\testr_command.py</a><br>
+    <b>Line number: </b>143<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+142	        os.system(&quot;coverage combine&quot;)
+143	        os.system(&quot;coverage html -d ./cover %s&quot; % self.omit)
+144	        os.system(&quot;coverage xml -o ./cover/coverage.xml %s&quot; % self.omit)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-52">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pbr\testr_command.py" target="_blank">backend/venv\Lib\site-packages\pbr\testr_command.py</a><br>
+    <b>Line number: </b>144<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+143	        os.system(&quot;coverage html -d ./cover %s&quot; % self.omit)
+144	        os.system(&quot;coverage xml -o ./cover/coverage.xml %s&quot; % self.omit)
+145	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-53">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pbr\tests\test_wsgi.py" target="_blank">backend/venv\Lib\site-packages\pbr\tests\test_wsgi.py</a><br>
+    <b>Line number: </b>111<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+110	
+111	        f = urlopen(m.group(1).decode(&#x27;utf-8&#x27;))
+112	        self.assertEqual(output, f.read())
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-54">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pbr\tests\test_wsgi.py" target="_blank">backend/venv\Lib\site-packages\pbr\tests\test_wsgi.py</a><br>
+    <b>Line number: </b>116<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+115	        # otherwise the log is buffered and the next readline() will hang.
+116	        urlopen(m.group(1).decode(&#x27;utf-8&#x27;))
+117	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-55">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_internal\commands\configuration.py" target="_blank">backend/venv\Lib\site-packages\pip\_internal\commands\configuration.py</a><br>
+    <b>Line number: </b>239<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+238	        try:
+239	            subprocess.check_call(f&#x27;{editor} &quot;{fname}&quot;&#x27;, shell=True)
+240	        except FileNotFoundError as e:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-56">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.<br>
+    <b>Test ID:</b> B411<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_internal\commands\search.py" target="_blank">backend/venv\Lib\site-packages\pip\_internal\commands\search.py</a><br>
+    <b>Line number: </b>5<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib</a><br>
+
+<div class="code">
+<pre>
+4	import textwrap
+5	import xmlrpc.client
+6	from collections import OrderedDict
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-57">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.<br>
+    <b>Test ID:</b> B411<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_internal\network\xmlrpc.py" target="_blank">backend/venv\Lib\site-packages\pip\_internal\network\xmlrpc.py</a><br>
+    <b>Line number: </b>6<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib</a><br>
+
+<div class="code">
+<pre>
+5	import urllib.parse
+6	import xmlrpc.client
+7	from typing import TYPE_CHECKING, Tuple
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-58">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> Using _HostType to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.<br>
+    <b>Test ID:</b> B411<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_internal\network\xmlrpc.py" target="_blank">backend/venv\Lib\site-packages\pip\_internal\network\xmlrpc.py</a><br>
+    <b>Line number: </b>14<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib</a><br>
+
+<div class="code">
+<pre>
+13	if TYPE_CHECKING:
+14	    from xmlrpc.client import _HostType, _Marshallable
+15	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-59">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_internal\utils\unpacking.py" target="_blank">backend/venv\Lib\site-packages\pip\_internal\utils\unpacking.py</a><br>
+    <b>Line number: </b>245<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+244	
+245	            tar.extractall(location, filter=pip_filter)
+246	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-60">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> Using xmlrpclib to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.<br>
+    <b>Test ID:</b> B411<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\distlib\compat.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\distlib\compat.py</a><br>
+    <b>Line number: </b>42<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib</a><br>
+
+<div class="code">
+<pre>
+41	    import httplib
+42	    import xmlrpclib
+43	    import Queue as queue
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-61">
+<div class="issue-block issue-sev-high">
+    <b>blacklist: </b> Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.<br>
+    <b>Test ID:</b> B411<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\distlib\compat.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\distlib\compat.py</a><br>
+    <b>Line number: </b>81<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_imports.html#b411-import-xmlrpclib</a><br>
+
+<div class="code">
+<pre>
+80	    import urllib.request as urllib2
+81	    import xmlrpc.client as xmlrpclib
+82	    import queue
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-62">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\distlib\database.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\distlib\database.py</a><br>
+    <b>Line number: </b>1032<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+1031	                f.close()
+1032	            return hashlib.md5(content).hexdigest()
+1033	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-63">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\distlib\index.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\distlib\index.py</a><br>
+    <b>Line number: </b>269<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+268	            file_data = f.read()
+269	        md5_digest = hashlib.md5(file_data).hexdigest()
+270	        sha256_digest = hashlib.sha256(file_data).hexdigest()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-64">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\distlib\util.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\distlib\util.py</a><br>
+    <b>Line number: </b>1310<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+1309	
+1310	        archive.extractall(dest_dir)
+1311	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-65">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py</a><br>
+    <b>Line number: </b>1714<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1713	            code = compile(source, script_filename, &#x27;exec&#x27;)
+1714	            exec(code, namespace, namespace)
+1715	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-66">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py</a><br>
+    <b>Line number: </b>1725<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1724	            script_code = compile(script_text, script_filename, &#x27;exec&#x27;)
+1725	            exec(script_code, namespace, namespace)
+1726	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-67">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\platformdirs\unix.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\platformdirs\unix.py</a><br>
+    <b>Line number: </b>179<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+178	                if not Path(path).exists():
+179	                    path = f&quot;/tmp/runtime-{getuid()}&quot;  # noqa: S108
+180	            else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-68">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\pygments\formatters\__init__.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\pygments\formatters\__init__.py</a><br>
+    <b>Line number: </b>103<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+102	        with open(filename, &#x27;rb&#x27;) as f:
+103	            exec(f.read(), custom_namespace)
+104	        # Retrieve the class `formattername` from that namespace
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-69">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\pygments\lexers\__init__.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\pygments\lexers\__init__.py</a><br>
+    <b>Line number: </b>154<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+153	        with open(filename, &#x27;rb&#x27;) as f:
+154	            exec(f.read(), custom_namespace)
+155	        # Retrieve the class `lexername` from that namespace
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-70">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py</a><br>
+    <b>Line number: </b>148<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+147	                    x = x.encode(&quot;utf-8&quot;)
+148	                return hashlib.md5(x).hexdigest()
+149	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-71">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py</a><br>
+    <b>Line number: </b>156<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+155	                    x = x.encode(&quot;utf-8&quot;)
+156	                return hashlib.sha1(x).hexdigest()
+157	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-72">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\requests\auth.py</a><br>
+    <b>Line number: </b>205<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+204	
+205	        cnonce = hashlib.sha1(s).hexdigest()[:16]
+206	        if _algorithm == &quot;MD5-SESS&quot;:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-73">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\rich\style.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\rich\style.py</a><br>
+    <b>Line number: </b>475<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+474	        &quot;&quot;&quot;Get meta information (can not be changed after construction).&quot;&quot;&quot;
+475	        return {} if self._meta is None else cast(Dict[str, Any], loads(self._meta))
+476	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-74">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pip\_vendor\urllib3\packages\six.py" target="_blank">backend/venv\Lib\site-packages\pip\_vendor\urllib3\packages\six.py</a><br>
+    <b>Line number: </b>787<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+786	            _locs_ = _globs_
+787	        exec (&quot;&quot;&quot;exec _code_ in _globs_, _locs_&quot;&quot;&quot;)
+788	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-75">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pkg_resources\__init__.py" target="_blank">backend/venv\Lib\site-packages\pkg_resources\__init__.py</a><br>
+    <b>Line number: </b>1739<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1738	            code = compile(source, script_filename, &#x27;exec&#x27;)
+1739	            exec(code, namespace, namespace)
+1740	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-76">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pkg_resources\__init__.py" target="_blank">backend/venv\Lib\site-packages\pkg_resources\__init__.py</a><br>
+    <b>Line number: </b>1750<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1749	            script_code = compile(script_text, script_filename, &#x27;exec&#x27;)
+1750	            exec(script_code, namespace, namespace)
+1751	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-77">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\cpp.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\cpp.py</a><br>
+    <b>Line number: </b>600<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+599	        try:
+600	            result = eval(expr)
+601	        except Exception:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-78">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\lex.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\lex.py</a><br>
+    <b>Line number: </b>215<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+214	        else:
+215	            exec(&#x27;import %s&#x27; % tabfile)
+216	            lextab = sys.modules[tabfile]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-79">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\lex.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\lex.py</a><br>
+    <b>Line number: </b>1039<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1038	                    pkgname = &#x27;.&#x27;.join(parts[:-1])
+1039	                    exec(&#x27;import %s&#x27; % pkgname)
+1040	                    srcfile = getattr(sys.modules[pkgname], &#x27;__file__&#x27;, &#x27;&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-80">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\yacc.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\yacc.py</a><br>
+    <b>Line number: </b>1562<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+1561	                try:
+1562	                    c = eval(s)
+1563	                    if (len(c) &gt; 1):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-81">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\yacc.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\yacc.py</a><br>
+    <b>Line number: </b>1982<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1981	        else:
+1982	            exec(&#x27;import %s&#x27; % module)
+1983	            parsetab = sys.modules[module]
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-82">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pycparser\ply\yacc.py" target="_blank">backend/venv\Lib\site-packages\pycparser\ply\yacc.py</a><br>
+    <b>Line number: </b>3254<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+3253	                pkgname = &#x27;.&#x27;.join(parts[:-1])
+3254	                exec(&#x27;import %s&#x27; % pkgname)
+3255	                srcfile = getattr(sys.modules[pkgname], &#x27;__file__&#x27;, &#x27;&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-83">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\formatters\__init__.py" target="_blank">backend/venv\Lib\site-packages\pygments\formatters\__init__.py</a><br>
+    <b>Line number: </b>103<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+102	        with open(filename, &#x27;rb&#x27;) as f:
+103	            exec(f.read(), custom_namespace)
+104	        # Retrieve the class `formattername` from that namespace
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-84">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\__init__.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\__init__.py</a><br>
+    <b>Line number: </b>154<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+153	        with open(filename, &#x27;rb&#x27;) as f:
+154	            exec(f.read(), custom_namespace)
+155	        # Retrieve the class `lexername` from that namespace
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-85">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_lua_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_lua_builtins.py</a><br>
+    <b>Line number: </b>225<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+224	    def get_newest_version():
+225	        f = urlopen(&#x27;http://www.lua.org/manual/&#x27;)
+226	        r = re.compile(r&#x27;^&lt;A HREF=&quot;(\d\.\d)/&quot;&gt;(Lua )?\1&lt;/A&gt;&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-86">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_lua_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_lua_builtins.py</a><br>
+    <b>Line number: </b>233<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+232	    def get_lua_functions(version):
+233	        f = urlopen(f&#x27;http://www.lua.org/manual/{version}/&#x27;)
+234	        r = re.compile(r&#x27;^&lt;A HREF=&quot;manual.html#pdf-(?!lua|LUA)([^:]+)&quot;&gt;\1&lt;/A&gt;&#x27;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-87">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_mysql_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_mysql_builtins.py</a><br>
+    <b>Line number: </b>1248<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1247	        # Pull content from lex.h.
+1248	        lex_file = urlopen(LEX_URL).read().decode(&#x27;utf8&#x27;, errors=&#x27;ignore&#x27;)
+1249	        keywords = parse_lex_keywords(lex_file)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-88">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_mysql_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_mysql_builtins.py</a><br>
+    <b>Line number: </b>1254<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1253	        # Parse content in item_create.cc.
+1254	        item_create_file = urlopen(ITEM_CREATE_URL).read().decode(&#x27;utf8&#x27;, errors=&#x27;ignore&#x27;)
+1255	        functions.update(parse_item_create_functions(item_create_file))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-89">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_php_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_php_builtins.py</a><br>
+    <b>Line number: </b>3299<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+3298	    def get_php_references():
+3299	        download = urlretrieve(PHP_MANUAL_URL)
+3300	        with tarfile.open(download[0]) as tar:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-90">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_php_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_php_builtins.py</a><br>
+    <b>Line number: </b>3301<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+3300	        with tarfile.open(download[0]) as tar:
+3301	            tar.extractall()
+3302	        yield from glob.glob(f&quot;{PHP_MANUAL_DIR}{PHP_REFERENCE_GLOB}&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-91">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_postgres_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_postgres_builtins.py</a><br>
+    <b>Line number: </b>642<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+641	    def update_myself():
+642	        content = urlopen(DATATYPES_URL).read().decode(&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;)
+643	        data_file = list(content.splitlines())
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-92">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\pygments\lexers\_postgres_builtins.py" target="_blank">backend/venv\Lib\site-packages\pygments\lexers\_postgres_builtins.py</a><br>
+    <b>Line number: </b>647<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+646	
+647	        content = urlopen(KEYWORDS_URL).read().decode(&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;)
+648	        keywords = parse_keywords(content)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-93">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\rich\style.py" target="_blank">backend/venv\Lib\site-packages\rich\style.py</a><br>
+    <b>Line number: </b>475<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+474	        &quot;&quot;&quot;Get meta information (can not be changed after construction).&quot;&quot;&quot;
+475	        return {} if self._meta is None else cast(Dict[str, Any], loads(self._meta))
+476	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-94">
+<div class="issue-block issue-sev-high">
+    <b>start_process_with_a_shell: </b> Starting a process with a shell, possible injection detected, security issue.<br>
+    <b>Test ID:</b> B605<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\command\bdist_rpm.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\command\bdist_rpm.py</a><br>
+    <b>Line number: </b>357<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b605_start_process_with_a_shell.html</a><br>
+
+<div class="code">
+<pre>
+356	
+357	        out = os.popen(q_cmd)
+358	        try:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-95">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\compilers\C\base.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\compilers\C\base.py</a><br>
+    <b>Line number: </b>1120<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+1119	        expected = &#x27;&quot;static&quot;, &quot;shared&quot;, &quot;dylib&quot;, &quot;xcode_stub&quot;&#x27;
+1120	        if lib_type not in eval(expected):
+1121	            raise ValueError(f&quot;&#x27;lib_type&#x27; must be {expected}&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-96">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\core.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\core.py</a><br>
+    <b>Line number: </b>268<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+267	                code = f.read().replace(r&#x27;\r\n&#x27;, r&#x27;\n&#x27;)
+268	                exec(code, g)
+269	        finally:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-97">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py</a><br>
+    <b>Line number: </b>115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+114	                libz_so = sorted(libz_so, key=lambda lib_path: len(lib_path))
+115	                shutil.copyfile(libz_so[-1], &#x27;/tmp/libxx_z.so&#x27;)
+116	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-98">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py</a><br>
+    <b>Line number: </b>120<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+119	                    [xx_c],
+120	                    library_dirs=[&#x27;/tmp&#x27;],
+121	                    libraries=[&#x27;xx_z&#x27;],
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-99">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py</a><br>
+    <b>Line number: </b>122<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+121	                    libraries=[&#x27;xx_z&#x27;],
+122	                    runtime_library_dirs=[&#x27;/tmp&#x27;],
+123	                )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-100">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py</a><br>
+    <b>Line number: </b>145<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+144	        if sys.platform == &#x27;linux&#x27; and copy_so:
+145	            os.unlink(&#x27;/tmp/libxx_z.so&#x27;)
+146	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-101">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_build_ext.py</a><br>
+    <b>Line number: </b>182<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+181	                # Linked against a library in /tmp
+182	                assert &quot;/tmp&quot; in rpaths
+183	                # The import is the real test here
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-102">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (exe).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_spawn.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_spawn.py</a><br>
+    <b>Line number: </b>32<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+31	
+32	        os.chmod(exe, 0o777)
+33	        with pytest.raises(DistutilsExecError):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-103">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (exe).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_spawn.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_distutils\tests\test_spawn.py</a><br>
+    <b>Line number: </b>44<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+43	
+44	        os.chmod(exe, 0o777)
+45	        spawn([exe])  # should work without any error
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-104">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\context.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\context.py</a><br>
+    <b>Line number: </b>63<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+62	    try:
+63	        req = urllib.request.urlopen(url)
+64	        with tarfile.open(fileobj=req, mode=&#x27;r|*&#x27;) as tf:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-105">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\context.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\context.py</a><br>
+    <b>Line number: </b>65<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+64	        with tarfile.open(fileobj=req, mode=&#x27;r|*&#x27;) as tf:
+65	            tf.extractall(path=target_dir, filter=strip_first_component)
+66	        yield target_dir
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-106">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\functools\__init__.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_vendor\jaraco\functools\__init__.py</a><br>
+    <b>Line number: </b>522<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+521	                try:
+522	                    return eval(use)
+523	                except TypeError:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-107">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_vendor\packaging\licenses\__init__.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_vendor\packaging\licenses\__init__.py</a><br>
+    <b>Line number: </b>100<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+99	    try:
+100	        invalid = eval(python_expression, globals(), locals())
+101	    except Exception:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-108">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\_vendor\platformdirs\unix.py" target="_blank">backend/venv\Lib\site-packages\setuptools\_vendor\platformdirs\unix.py</a><br>
+    <b>Line number: </b>179<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+178	                if not Path(path).exists():
+179	                    path = f&quot;/tmp/runtime-{getuid()}&quot;  # noqa: S108
+180	            else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-109">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\build_meta.py" target="_blank">backend/venv\Lib\site-packages\setuptools\build_meta.py</a><br>
+    <b>Line number: </b>317<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+316	        try:
+317	            exec(code, locals())
+318	        except SystemExit as e:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-110">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\command\bdist_egg.py" target="_blank">backend/venv\Lib\site-packages\setuptools\command\bdist_egg.py</a><br>
+    <b>Line number: </b>385<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+384	    f.read(skip)
+385	    code = marshal.load(f)
+386	    f.close()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-111">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\config\_validate_pyproject\formats.py" target="_blank">backend/venv\Lib\site-packages\setuptools\config\_validate_pyproject\formats.py</a><br>
+    <b>Line number: </b>152<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+151	    context = ssl.create_default_context()
+152	    with urlopen(url, context=context) as response:  # noqa: S310 (audit URLs)
+153	        headers = Message()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-112">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\depends.py" target="_blank">backend/venv\Lib\site-packages\setuptools\depends.py</a><br>
+    <b>Line number: </b>133<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+132	                f.read(8)  # skip magic &amp; date
+133	                code = marshal.load(f)
+134	            elif kind == PY_FROZEN:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-113">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\launch.py" target="_blank">backend/venv\Lib\site-packages\setuptools\launch.py</a><br>
+    <b>Line number: </b>32<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+31	    code = compile(norm_script, script_name, &#x27;exec&#x27;)
+32	    exec(code, namespace)
+33	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-114">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\package_index.py" target="_blank">backend/venv\Lib\site-packages\setuptools\package_index.py</a><br>
+    <b>Line number: </b>1159<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+1158	    if os.path.isfile(filename):
+1159	        return urllib.request.urlopen(url)
+1160	    elif path.endswith(&#x27;/&#x27;) and os.path.isdir(filename):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-115">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\sandbox.py" target="_blank">backend/venv\Lib\site-packages\setuptools\sandbox.py</a><br>
+    <b>Line number: </b>52<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+51	    code = compile(script, filename, &#x27;exec&#x27;)
+52	    exec(code, globals, locals)
+53	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-116">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\config\downloads\__init__.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\config\downloads\__init__.py</a><br>
+    <b>Line number: </b>53<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+52	def download(url: str, dest: Path):
+53	    with urlopen(url) as f:
+54	        data = f.read()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-117">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\environment.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\environment.py</a><br>
+    <b>Line number: </b>77<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+76	            stderr=_PIPE,
+77	            shell=shell,
+78	            env=env,
+79	            encoding=&quot;utf-8&quot;,
+80	        )
+81	
+82	        if isinstance(data_stream, tuple):
+83	            data_stream = slice(*data_stream)
+84	        data = proc.communicate()[data_stream]
+85	    except OSError:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-118">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py</a><br>
+    <b>Line number: </b>174<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+173	    id_ = package if version is LATEST else f&quot;{package}/{version}&quot;
+174	    with urlopen(f&quot;https://pypi.org/pypi/{id_}/json&quot;) as f:
+175	        metadata = json.load(f)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-119">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py</a><br>
+    <b>Line number: </b>187<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+186	def download(url, dest, md5_digest):
+187	    with urlopen(url) as f:
+188	        data = f.read()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-120">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\integration\test_pip_install_sdist.py</a><br>
+    <b>Line number: </b>190<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+189	
+190	    assert md5(data).hexdigest() == md5_digest
+191	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-121">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\test_easy_install.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\test_easy_install.py</a><br>
+    <b>Line number: </b>682<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+681	                    tf.extraction_filter = lambda member, path: member
+682	                    tf.extractall(foobar_1_dir)
+683	                sys.path.insert(1, foobar_1_dir)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-122">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\test_editable_install.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\test_editable_install.py</a><br>
+    <b>Line number: </b>450<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+449	        loc = {}
+450	        exec(finder, loc, loc)
+451	        loc[&quot;install&quot;]()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-123">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\test_extern.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\test_extern.py</a><br>
+    <b>Line number: </b>15<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+14	def test_distribution_picklable():
+15	    pickle.loads(pickle.dumps(Distribution()))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-124">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.<br>
+    <b>Test ID:</b> B310<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\test_virtualenv.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\test_virtualenv.py</a><br>
+    <b>Line number: </b>33<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen" target="_blank">https://bandit.readthedocs.io/en/1.8.3/blacklists/blacklist_calls.html#b310-urllib-urlopen</a><br>
+
+<div class="code">
+<pre>
+32	        try:
+33	            urlopen(&#x27;https://pypi.org&#x27;, timeout=1)
+34	        except URLError:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-125">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (runsh).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\setuptools\tests\test_wheel.py" target="_blank">backend/venv\Lib\site-packages\setuptools\tests\test_wheel.py</a><br>
+    <b>Line number: </b>650<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+649	            runsh = pathlib.Path(source_dir) / &quot;script.sh&quot;
+650	            os.chmod(runsh, 0o777)
+651	            subprocess.check_call(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-126">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\stevedore\tests\test_cache.py" target="_blank">backend/venv\Lib\site-packages\stevedore\tests\test_cache.py</a><br>
+    <b>Line number: </b>29<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+28	        &quot;&quot;&quot;
+29	        with mock.patch.object(sys, &#x27;executable&#x27;, &#x27;/tmp/fake&#x27;):
+30	            sot = _cache.Cache()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-127">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\debug\__init__.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\debug\__init__.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+44	def hash_pin(pin: str) -&gt; str:
+45	    return hashlib.sha1(f&quot;{pin} added salt&quot;.encode(&quot;utf-8&quot;, &quot;replace&quot;)).hexdigest()[:12]
+46	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-128">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\debug\__init__.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\debug\__init__.py</a><br>
+    <b>Line number: </b>196<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+195	
+196	    h = hashlib.sha1()
+197	    for bit in chain(probably_public_bits, private_bits):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-129">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\debug\console.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\debug\console.py</a><br>
+    <b>Line number: </b>177<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+176	        try:
+177	            exec(code, self.locals)
+178	        except Exception:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-130">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\http.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\http.py</a><br>
+    <b>Line number: </b>981<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+980	    &quot;&quot;&quot;
+981	    return sha1(data).hexdigest()
+982	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-131">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\routing\rules.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\routing\rules.py</a><br>
+    <b>Line number: </b>737<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+736	        locs: dict[str, t.Any] = {}
+737	        exec(code, globs, locs)
+738	        return locs[name]  # type: ignore
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-132">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\serving.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\serving.py</a><br>
+    <b>Line number: </b>848<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+847	
+848	            if self.host in {&quot;0.0.0.0&quot;, &quot;::&quot;}:
+849	                messages.append(f&quot; * Running on all addresses ({self.host})&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-133">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href="backend/venv\Lib\site-packages\werkzeug\serving.py" target="_blank">backend/venv\Lib\site-packages\werkzeug\serving.py</a><br>
+    <b>Line number: </b>851<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.8.3/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+850	
+851	                if self.host == &quot;0.0.0.0&quot;:
+852	                    localhost = &quot;127.0.0.1&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
