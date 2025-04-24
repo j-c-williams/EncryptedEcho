@@ -1,23 +1,17 @@
 // src/app/home/home.component.ts
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MessageService } from '../message.service';
+import { MessageService, DecryptedMessage } from '../message.service';
 import { UserService } from '../user.service';
-
-interface Message {
-  id: number;
-  sender: string;
-  encrypted_msg: string;
-  decrypted?: string;
-}
+import { AuthService } from '../auth/auth.service';
+import { CryptoService } from '../crypto.service';
 
 interface User {
   id: number;
   username: string;
-  public_key: string;
 }
 
 @Component({
@@ -26,21 +20,25 @@ interface User {
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [MessageService, UserService]
+  providers: [MessageService, UserService, CryptoService, AuthService]
 })
 export class HomeComponent implements OnInit {
   messageForm: FormGroup;
-  messages: Message[] = [];
+  messages: DecryptedMessage[] = [];
   users: User[] = [];
   currentUser: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+  
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.messageForm = this.fb.group({
@@ -50,9 +48,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Check if user is logged in
+    // Skip localStorage checks if we're not in the browser
+    if (!this.isBrowser) {
+      return;
+    }
+    
+    // Check if user is logged in and has a private key
     const username = localStorage.getItem('username');
-    if (!username) {
+    if (!username || !this.authService.hasPrivateKey()) {
       this.router.navigate(['/login']);
       return;
     }
@@ -65,8 +68,12 @@ export class HomeComponent implements OnInit {
   loadUsers(): void {
     this.userService.getUsers().subscribe({
       next: (users) => {
-        // Filter out current user
-        this.users = users.filter(user => user.username !== this.currentUser);
+        // Filter out current user if we're in the browser
+        if (this.isBrowser) {
+          this.users = users.filter(user => user.username !== this.currentUser);
+        } else {
+          this.users = users;
+        }
       },
       error: (error) => {
         console.error('Error loading users', error);
@@ -76,17 +83,15 @@ export class HomeComponent implements OnInit {
   }
 
   loadMessages(): void {
+    if (!this.isBrowser) {
+      return; // Skip on the server side
+    }
+    
     this.isLoading = true;
     this.messageService.getMessages().subscribe({
       next: (messages) => {
         this.messages = messages;
         this.isLoading = false;
-        
-        // TODO: In a real app, decrypt messages here using the private key
-        // For demo purposes, we'll just display the encrypted messages
-        this.messages.forEach(msg => {
-          msg.decrypted = '(Encrypted message)'; // Placeholder for actual decryption
-        });
       },
       error: (error) => {
         console.error('Error loading messages', error);
@@ -97,24 +102,18 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.messageForm.invalid) {
+    if (this.messageForm.invalid || !this.isBrowser) {
       return;
     }
 
     const { recipient, message } = this.messageForm.value;
     
-    // For demo purposes, we're not implementing actual encryption yet
-    // In a real app, you would:
-    // 1. Generate an AES key
-    // 2. Encrypt the message with the AES key
-    // 3. Get recipient's public key
-    // 4. Encrypt the AES key with recipient's public key
-    // 5. Send both encrypted message and encrypted key
-
     this.isLoading = true;
+    this.errorMessage = '';
+    
     this.messageService.sendMessage({
       receiver: recipient,
-      encrypted_msg: message, // This would be encrypted in a real app
+      message: message
     }).subscribe({
       next: (response) => {
         console.log('Message sent successfully', response);
@@ -137,7 +136,9 @@ export class HomeComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('username');
-    this.router.navigate(['/login']);
+    if (this.isBrowser) {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+    }
   }
 }

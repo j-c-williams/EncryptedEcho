@@ -1,8 +1,8 @@
 // src/app/login/login.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, PLATFORM_ID, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 
@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   isSubmitting: boolean = false;
+  
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +41,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Skip localStorage checks if we're not in the browser
+    if (!this.isBrowser) {
+      return;
+    }
+    
     // Check if user is already logged in
     if (localStorage.getItem('username')) {
       this.router.navigate(['/home']);
@@ -64,12 +72,14 @@ export class LoginComponent implements OnInit {
       next: (response: LoginResponse) => {
         console.log('Login successful', response);
         
-        // Store username in localStorage
-        localStorage.setItem('username', this.loginForm.value.username);
-        
-        // Store user_id in localStorage if available
-        if (response.user_id) {
-          localStorage.setItem('user_id', response.user_id.toString());
+        // Store username in localStorage if in browser
+        if (this.isBrowser) {
+          localStorage.setItem('username', this.loginForm.value.username);
+          
+          // Store user_id in localStorage if available
+          if (response.user_id) {
+            localStorage.setItem('user_id', response.user_id.toString());
+          }
         }
         
         // Navigate to home after login

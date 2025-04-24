@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+// src/app/register/register.component.ts
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, HttpClientModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [AuthService]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
   isSubmitting: boolean = false;
+  
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +31,19 @@ export class RegisterComponent {
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+  }
+
+  ngOnInit(): void {
+    // Skip localStorage checks if we're not in the browser
+    if (!this.isBrowser) {
+      return;
+    }
+    
+    // Check if user is already logged in
+    if (localStorage.getItem('username')) {
+      this.router.navigate(['/home']);
+      return;
+    }
   }
 
   onSubmit(): void {
