@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, g
+from flask_cors import CORS  # Add this import
 import sqlite3
 import bcrypt
 import os
 
 app = Flask(__name__)
+# Enable CORS for all routes
+CORS(app)
+
 DATABASE = 'encrypted_echo.db'
 
 # --- Database connection helper ---
@@ -84,6 +88,17 @@ def index():
 
 # --- Run the app ---
 if __name__ == '__main__':
-    # Initialize the database before running the app
-    # You might need to specify host='0.0.0.0' to make it accessible externally
+    # Ensure database table exists
+    db = sqlite3.connect(DATABASE)
+    db.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password_hash BLOB NOT NULL
+    )
+    ''')
+    db.commit()
+    db.close()
+    
+    # Run the app
     app.run(debug=True, host='0.0.0.0', port=5000)

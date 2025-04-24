@@ -1,0 +1,41 @@
+<!-- src/app/login/login.component.html -->
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="Enter username" class="form-control">
+        <div class="error-message" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          Username is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter password"
+          class="form-control">
+        <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Password is required
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid || isSubmitting" class="btn-login">
+        {{ isSubmitting ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <div class="register-link">
+        Don't have an account? <a routerLink="/register">Register here</a>
+      </div>
+    </form>
+  </div>
+</div>

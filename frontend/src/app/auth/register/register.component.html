@@ -1,0 +1,43 @@
+<!-- src/app/register/register.component.html -->
+<div class="register-container">
+  <div class="register-card">
+    <h2>Create an Account</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="Enter username" class="form-control">
+        <div class="error-message"
+          *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+          <span *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</span>
+          <span *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 3
+            characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter password"
+          class="form-control">
+        <div class="error-message"
+          *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6
+            characters</span>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid || isSubmitting" class="btn-register">
+        {{ isSubmitting ? 'Registering...' : 'Register' }}
+      </button>
+
+      <div class="login-link">
+        Already have an account? <a routerLink="/login">Login here</a>
+      </div>
+    </form>
+  </div>
+</div>
