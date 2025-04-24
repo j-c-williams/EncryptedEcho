@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify, g
-from flask_cors import CORS  # Add this import
+from flask_cors import CORS
 import sqlite3
 import bcrypt
 import os
+from datetime import datetime
 
 app = Flask(__name__)
-# Enable CORS for all routes
 CORS(app)
 
 DATABASE = 'encrypted_echo.db'
@@ -45,8 +45,10 @@ def register():
         db = get_db()
         cursor = db.cursor()
         try:
-            cursor.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", 
-                          (username, hashed_pw))
+            cursor.execute(
+                "INSERT INTO users (username, password_hash) VALUES (?, ?)", 
+                (username, hashed_pw)
+            )
             db.commit()
             return jsonify({"message": "User registered successfully!"}), 201
         except sqlite3.IntegrityError:
@@ -54,7 +56,7 @@ def register():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
-# --- Login route (suggested addition) ---
+# --- Login route ---
 @app.route('/login', methods=['POST'])
 def login():
     try:
@@ -75,9 +77,111 @@ def login():
         user = cursor.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
         
         if user and bcrypt.checkpw(password.encode('utf-8'), user['password_hash']):
-            return jsonify({"message": "Login successful!"}), 200
+            return jsonify({
+                "message": "Login successful!",
+                "user_id": user['id']
+            }), 200
         else:
             return jsonify({"error": "Invalid credentials"}), 401
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+# --- Get Users route ---
+@app.route('/users', methods=['GET'])
+def get_users():
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        users = cursor.execute("SELECT id, username FROM users").fetchall()
+        
+        # Convert to list of dictionaries
+        users_list = []
+        for user in users:
+            users_list.append({
+                "id": user['id'],
+                "username": user['username']
+            })
+        
+        return jsonify(users_list), 200
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+# --- Send Message route ---
+@app.route('/send', methods=['POST'])
+def send_message():
+    try:
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({"error": "Invalid JSON or missing Content-Type header"}), 400
+            
+        sender_username = data.get('sender')
+        receiver_username = data.get('receiver')
+        encrypted_msg = data.get('encrypted_msg')
+        
+        if not sender_username or not receiver_username or not encrypted_msg:
+            return jsonify({"error": "Sender, receiver, and encrypted message are required."}), 400
+
+        # Get user IDs
+        db = get_db()
+        cursor = db.cursor()
+        
+        sender = cursor.execute("SELECT id FROM users WHERE username = ?", (sender_username,)).fetchone()
+        if not sender:
+            return jsonify({"error": "Sender does not exist"}), 400
+        
+        receiver = cursor.execute("SELECT id FROM users WHERE username = ?", (receiver_username,)).fetchone()
+        if not receiver:
+            return jsonify({"error": "Receiver does not exist"}), 400
+        
+        # Store the message
+        cursor.execute(
+            "INSERT INTO messages (sender_id, receiver_id, encrypted_message) VALUES (?, ?, ?)", 
+            (sender['id'], receiver['id'], encrypted_msg)
+        )
+        db.commit()
+        
+        return jsonify({"message": "Message sent successfully!"}), 201
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+# --- Get Messages route ---
+@app.route('/messages', methods=['GET'])
+def get_messages():
+    try:
+        username = request.args.get('username')
+        
+        if not username:
+            return jsonify({"error": "Username is required."}), 400
+        
+        db = get_db()
+        cursor = db.cursor()
+        
+        # Get user id
+        user = cursor.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
+        if not user:
+            return jsonify({"error": "User does not exist"}), 400
+        
+        # Get messages where the user is the receiver
+        # Join with users table to get the sender's username
+        messages = cursor.execute('''
+            SELECT m.id, u.username as sender, m.encrypted_message
+            FROM messages m
+            JOIN users u ON m.sender_id = u.id
+            WHERE m.receiver_id = ?
+            ORDER BY m.id DESC
+        ''', (user['id'],)).fetchall()
+        
+        # Convert to list of dictionaries
+        messages_list = []
+        for message in messages:
+            messages_list.append({
+                "id": message['id'],
+                "sender": message['sender'],
+                "encrypted_msg": message['encrypted_message']
+            })
+        
+        return jsonify(messages_list), 200
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
@@ -88,17 +192,5 @@ def index():
 
 # --- Run the app ---
 if __name__ == '__main__':
-    # Ensure database table exists
-    db = sqlite3.connect(DATABASE)
-    db.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password_hash BLOB NOT NULL
-    )
-    ''')
-    db.commit()
-    db.close()
-    
     # Run the app
     app.run(debug=True, host='0.0.0.0', port=5000)

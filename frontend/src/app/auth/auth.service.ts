@@ -10,6 +10,7 @@ export interface User {
 
 export interface AuthResponse {
   message: string;
+  user_id?: number;
   error?: string;
 }
 
@@ -17,7 +18,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'http://localhost:5000'; // Your Flask backend URL
 
   constructor(private http: HttpClient) { }
 

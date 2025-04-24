@@ -1,26 +1,26 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
-    providers: [provideHttpClient()]
+    loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: 'register',
-    loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent),
-    providers: [provideHttpClient()]
+    loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   },
   { 
     path: '', 
-    redirectTo: '/login', 
+    redirectTo: '/home', 
     pathMatch: 'full' 
   },
   { 
     path: '**', 
-    redirectTo: '/login' 
+    redirectTo: '/home' 
   }
 ];
