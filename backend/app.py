@@ -4,6 +4,8 @@ import sqlite3
 import bcrypt
 import os
 from datetime import datetime
+# Import the updated crypto_utils module
+import crypto_utils
 
 app = Flask(__name__)
 CORS(app)
@@ -204,7 +206,7 @@ def send_message():
         receiver_username = data.get('receiver')
         encrypted_msg = data.get('encrypted_msg')
         encrypted_key = data.get('encrypted_key')
-        iv = data.get('iv')
+        nonce = data.get('iv')  # Note: 'iv' from frontend is stored as 'nonce' in crypto_utils
         
         if not sender_username or not receiver_username or not encrypted_msg:
             return jsonify({"error": "Sender, receiver, and encrypted message are required."}), 400
@@ -250,7 +252,7 @@ def send_message():
             if 'encrypted_key' in columns and 'iv' in columns:
                 cursor.execute(
                     "INSERT INTO messages (sender_id, receiver_id, encrypted_message, encrypted_key, iv) VALUES (?, ?, ?, ?, ?)", 
-                    (sender_id, receiver_id, encrypted_msg, encrypted_key, iv)
+                    (sender_id, receiver_id, encrypted_msg, encrypted_key, nonce)
                 )
             else:
                 cursor.execute(
@@ -280,7 +282,7 @@ def send_message():
             # Try the insert again
             cursor.execute(
                 "INSERT INTO messages (sender_id, receiver_id, encrypted_message, encrypted_key, iv) VALUES (?, ?, ?, ?, ?)", 
-                (sender_id, receiver_id, encrypted_msg, encrypted_key, iv)
+                (sender_id, receiver_id, encrypted_msg, encrypted_key, nonce)
             )
             db.commit()
             return jsonify({"message": "Message sent successfully (after table creation)!"}), 201
@@ -368,6 +370,49 @@ def get_messages():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
+# --- Server-side encryption/decryption demo route (optional) ---
+@app.route('/crypto_demo', methods=['POST'])
+def crypto_demo():
+    """
+    Demonstrate the server-side crypto capabilities
+    Note: In a real E2E system, encryption/decryption would happen on client side
+    """
+    try:
+        data = request.get_json()
+        
+        if not data or not data.get('message'):
+            return jsonify({"error": "Message is required"}), 400
+            
+        # Generate a key pair
+        key_pair = crypto_utils.generate_rsa_key_pair()
+        
+        # Encrypt the message
+        encrypted = crypto_utils.encrypt_message(
+            key_pair['public_key'], 
+            data.get('message')
+        )
+        
+        # Decrypt the message (just to demonstrate)
+        decrypted = crypto_utils.decrypt_message(
+            key_pair['private_key'], 
+            encrypted['encrypted_message'],
+            encrypted['encrypted_key'],
+            encrypted['nonce']
+        )
+        
+        return jsonify({
+            "original": data.get('message'),
+            "encrypted": {
+                "message": encrypted['encrypted_message'],
+                "key": encrypted['encrypted_key'],
+                "nonce": encrypted['nonce']
+            },
+            "decrypted": decrypted
+        }), 200
+        
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
 # --- Debug route to check database structure ---
 @app.route('/dbinfo', methods=['GET'])
 def db_info():
@@ -390,4 +435,4 @@ def index():
 # --- Run the app ---
 if __name__ == '__main__':
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='127.0.0.1', port=5000)
