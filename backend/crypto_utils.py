@@ -8,7 +8,7 @@ def generate_rsa_key_pair():
     """Generate an RSA key pair and return it in PEM format"""
     private_key = rsa.generate_private_key(
         public_exponent=65537,  # Standard value for e
-        key_size=2048,          # 2048 bits provides good security
+        key_size=2048,        
     )
     
     public_key = private_key.public_key()
@@ -74,7 +74,7 @@ def rsa_decrypt(private_key, encrypted_data):
 
 def generate_aes_key():
     """Generate a random AES key"""
-    return os.urandom(32)  # 256-bit key
+    return os.urandom(32)  # 256 bit key (32 bytes)
 
 def aes_encrypt(key, plaintext):
     """Encrypt data with AES-GCM"""
